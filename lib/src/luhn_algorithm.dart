@@ -26,7 +26,8 @@ class Luhn {
   /// Number of items can be provided with [n] parameter.
   static Iterable<String> generate({String format = 'xxxxc', int n = 5}) sync* {
     var items = n;
-    if ('c'.allMatches(format).length != 1 || format.indexOf('c') != format.length - 1) {
+    if ('c'.allMatches(format).length != 1 ||
+        format.indexOf('c') != format.length - 1) {
       throw InvalidFormatException(
         'Control digit (c) should be placed at the end of the format string',
       );
@@ -120,5 +121,6 @@ class Luhn {
   }
 
   /// Replaces all matches with a random digit
-  static String _replaceWithRandomDigit(Match _) => '${Random.secure().nextInt(10)}';
+  static String _replaceWithRandomDigit(Match _) =>
+      '${Random.secure().nextInt(10)}';
 }

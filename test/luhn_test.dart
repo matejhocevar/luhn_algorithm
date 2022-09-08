@@ -10,14 +10,21 @@ void main() {
         () => Luhn.generate(format: ''),
         throwsA(isA<InvalidFormatException>()),
       );
-      expect(() => Luhn.generate(format: 'x'), throwsA(isA<InvalidFormatException>()));
-      expect(() => Luhn.generate(format: 'xxxxxx-xxx'), throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generate(format: 'x'),
+          throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generate(format: 'xxxxxx-xxx'),
+          throwsA(isA<InvalidFormatException>()));
     });
 
-    test('should throw an exception if control digit is at the end of the format', () {
-      expect(() => Luhn.generate(format: 'cx'), throwsA(isA<InvalidFormatException>()));
-      expect(() => Luhn.generate(format: 'xxcxxxx-xxx'), throwsA(isA<InvalidFormatException>()));
-      expect(() => Luhn.generate(format: 'cxxcxxxx-xxx'), throwsA(isA<InvalidFormatException>()));
+    test(
+        'should throw an exception if control digit is at the end of the format',
+        () {
+      expect(() => Luhn.generate(format: 'cx'),
+          throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generate(format: 'xxcxxxx-xxx'),
+          throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generate(format: 'cxxcxxxx-xxx'),
+          throwsA(isA<InvalidFormatException>()));
     });
 
     test('should return the correct amount of items', () {
@@ -43,15 +50,23 @@ void main() {
 
   group('Luhn generateList', () {
     test('should throw an exception if control digit is not in format', () {
-      expect(() => Luhn.generateList(format: ''), throwsA(isA<InvalidFormatException>()));
-      expect(() => Luhn.generateList(format: 'x'), throwsA(isA<InvalidFormatException>()));
-      expect(() => Luhn.generateList(format: 'xxxxxx/xxx'), throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generateList(format: ''),
+          throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generateList(format: 'x'),
+          throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generateList(format: 'xxxxxx/xxx'),
+          throwsA(isA<InvalidFormatException>()));
     });
 
-    test('should throw an exception if control digit is at the end of the format', () {
-      expect(() => Luhn.generateList(format: 'cx'), throwsA(isA<InvalidFormatException>()));
-      expect(() => Luhn.generateList(format: 'xxcxxxx-xxx-'), throwsA(isA<InvalidFormatException>()));
-      expect(() => Luhn.generateList(format: 'cxxcxxxx-xxx-'), throwsA(isA<InvalidFormatException>()));
+    test(
+        'should throw an exception if control digit is at the end of the format',
+        () {
+      expect(() => Luhn.generateList(format: 'cx'),
+          throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generateList(format: 'xxcxxxx-xxx-'),
+          throwsA(isA<InvalidFormatException>()));
+      expect(() => Luhn.generateList(format: 'cxxcxxxx-xxx-'),
+          throwsA(isA<InvalidFormatException>()));
     });
 
     test('should return the correct amount of items', () {
@@ -67,7 +82,8 @@ void main() {
 
       format = '123456xc';
       regExp = RegExp(r'^123456[0-9]{2}$');
-      expect(regExp.hasMatch(Luhn.generateList(format: format, n: 10).last), true);
+      expect(
+          regExp.hasMatch(Luhn.generateList(format: format, n: 10).last), true);
     });
   });
 
