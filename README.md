@@ -1,5 +1,6 @@
 # Luhn algorithm
 
+[![Dart CI](https://github.com/matejhocevar/luhn_algorithm/actions/workflows/dart-ci.yml/badge.svg)](https://github.com/matejhocevar/luhn_algorithm/actions/workflows/dart-ci.yml)
 [![License: MIT][license_badge]][license_link]
 
 Luhn algorithm is an implementation of the famous Luhn algorithm in Dart. Generate, checksum and validate.
@@ -53,12 +54,12 @@ dependencies:
 
 ## Usage
 
-### Import package
-
 ### Generate
 This package contains a function for generating valid Luhn values. You can provide your own formatting, non-digit characters will be ignored.
 
 This is specially useful for testing.
+
+---
 
 #### Generate as iterable
 
@@ -93,6 +94,8 @@ Luhn.generate(format: 'xxxx-xxxx-xxxx-xxxc', n: 10).forEach(print);
 // 2410-2528-3254-5799
 ```
 
+---
+
 #### Generate as list
 
 This function takes the same parameters and `generate` function.
@@ -109,6 +112,8 @@ print(Luhn.generateList(format: 'xxc', n: 10));
 // [968, 075, 760, 497, 174, 463, 372, 133, 455, 836]
 ```
 
+---
+
 ### Checksum
 To get checksum of your value use `checksum` function.
 
@@ -117,6 +122,8 @@ final var checksum = Luhn.checksum('1234');
 print(checksum);
 // 4
 ```
+
+---
 
 ### Validate
 To validate existing value us static method `Luhn.validate`. Code assumes that the last character of
