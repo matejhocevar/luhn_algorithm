@@ -1,0 +1,11 @@
+name: luhn_algorithm
+description: Luhn algorithm is an implementation of the famous Luhn algorithm in Dart. Generate, checksum and validate.
+version: 1.0.0+1
+repository: https://github.com/matejhocevar/luhn_algorithm
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dev_dependencies:
+  test: ^1.19.2
+  very_good_analysis: ^3.0.1

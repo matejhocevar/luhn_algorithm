@@ -1,0 +1,72 @@
+name: Dart CI
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore: [ '**.md', 'example/**' ]
+  pull_request:
+    branches: [ master ]
+    paths-ignore: [ '**.md', 'example/**' ]
+  schedule:
+    # Runs at 00:00 UTC on the 1, 8, 15, 22 and 29th of every month.
+    - cron: '0 0 */7 * *'
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        sdk: [ beta, stable, 2.17.0, 2.15.0, 2.12.0 ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1.3
+        with:
+          sdk: ${{ matrix.sdk }}
+
+      - name: Print Dart version
+        run: dart --version
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Analyze
+        if: ${{ matrix.sdk == 'stable' }}
+        run: dart analyze --fatal-infos --fatal-warnings
+
+      - name: Format code
+        if: ${{ matrix.sdk == 'stable' }}
+        run: dart format . --set-exit-if-changed
+
+      - name: Active coverage
+        run: dart pub global activate coverage
+
+      - name: Run tests
+        run: dart pub run test test/luhn_test.dart --chain-stack-traces
+
+      - name: Start Observatory
+        run: dart
+          --disable-service-auth-codes
+          --enable-vm-service=8111
+          --pause-isolates-on-exit
+          --enable-asserts
+          test/luhn_test.dart &
+
+      - name: Collect coverage
+        run: nohup dart pub global run coverage:collect_coverage
+          --port=8111
+          --out=coverage.json
+          --wait-paused
+          --resume-isolates
+
+      - name: Format coverage
+        run: dart pub global run coverage:format_coverage
+          --lcov
+          --in=coverage.json
+          --out=lcov.info
+          --report-on=lib
+
+      - uses: codecov/codecov-action@v2.1.0
