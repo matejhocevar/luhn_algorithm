@@ -2,6 +2,7 @@
 
 [![Dart CI](https://github.com/matejhocevar/luhn_algorithm/actions/workflows/dart-ci.yml/badge.svg)](https://github.com/matejhocevar/luhn_algorithm/actions/workflows/dart-ci.yml)
 [![codecov](https://codecov.io/gh/matejhocevar/luhn_algorithm/branch/main/graph/badge.svg?token=J1SUECF4ZA)](https://codecov.io/gh/matejhocevar/luhn_algorithm)
+[![Pub](https://img.shields.io/pub/v/luhn_algorithm.svg)](https://pub.dartlang.org/packages/luhn_algorithm)
 [![License: MIT][license_badge]][license_link]
 
 > Luhn algorithm is an implementation of the famous Luhn algorithm in Dart. Generate, checksum and validate.
